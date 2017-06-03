@@ -1,22 +1,25 @@
 from django.shortcuts import render
-import os
-import pandas as pd
-from tabula import read_pdf
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
+import fileinput,io
 from loan.models import Document
 from loan.forms import DocumentForm
+import os
+import pandas as pd
+import sys,subprocess
+from tabula import read_pdf_table
 
-
-
+# uploadig pdf and processing it
 def upload_pdf(request):
 	 # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc_name=str(newdoc.docfile)
+            newdoc_df=read_pdf_table(newdoc_name,guess=False)
+            print newdoc_df
             newdoc.save()	
 
             # Redirect to the document list after POST

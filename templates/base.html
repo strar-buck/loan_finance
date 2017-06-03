@@ -31,13 +31,13 @@
 					<a class="navbar-brand" href=""></a>
 				</div>
 
-				<a href='/' class="navbar-brand"><strong>Avail Finance</strong>&nbsp;-&nbsp;<small style='color:#ffccee;'>Providing loan</small></a>
+				<a href='/' class="navbar-brand"><strong style='margin-left:40px;'>Avail Finance</strong>&nbsp;-&nbsp;<small style='color:#ffccee;'>Providing loan</small></a>
 
 	            {% block extra %}
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	          			<ul class="nav navbar-nav">
-	                
+	                		<li><a href="{% url 'loan:dashboard' %}">Dashboard</a></li>
 	                	</ul>
 	        		</div><!-- /.navbar-collapse -->
 

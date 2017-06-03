@@ -26,6 +26,7 @@
                 <p>No documents.</p>
             {% endif %}
 
+
             <!-- Upload form. Note enctype attribute! -->
             <form action="{% url "loan:list" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}

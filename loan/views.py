@@ -9,6 +9,10 @@ import os
 import pandas as pd
 import sys,subprocess
 from tabula import read_pdf_table
+from django.http import JsonResponse
+import json
+
+pdf_path='/home/ritu/Desktop/avail-finance/sbi_loan/static/images/'
 
 # uploadig pdf and processing it
 def upload_pdf(request):
@@ -17,10 +21,10 @@ def upload_pdf(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc_name=str(newdoc.docfile)
+            newdoc.save()
+            newdoc_name=pdf_path + str(newdoc.docfile)
             newdoc_df=read_pdf_table(newdoc_name,guess=False)
-            print newdoc_df
-            newdoc.save()	
+            data=newdoc_df.to_json()
 
             # Redirect to the document list after POST
             return HttpResponseRedirect(reverse('loan:list'))
@@ -30,6 +34,7 @@ def upload_pdf(request):
     # Load documents for the list page
     documents = Document.objects.all()
 
+
     # Render list page with the documents and the form
     return render(
         request,
@@ -37,3 +42,6 @@ def upload_pdf(request):
         {'documents': documents, 'form': form}
 )
 
+
+def dashboard(request):
+	pass

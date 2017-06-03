@@ -1,0 +1,9 @@
+dj-database-url==0.2.2
+dj-static==0.0.5
+Django==1.8.5
+djangorestframework==3.3.3
+pandas==0.20.1
+Pillow==3.4.2
+six==1.10.0
+South==1.0
+static==0.4
